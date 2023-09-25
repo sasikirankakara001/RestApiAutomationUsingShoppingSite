@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.*;
 
 import java.io.File;
 
-import org.sasik.project.pojoclasses.AddProduct;
+//import org.sasik.project.pojoclasses.AddProduct;
 import org.sasik.project.pojoclasses.Login;
 
 public class Test {
