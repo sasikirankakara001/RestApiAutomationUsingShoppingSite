@@ -50,7 +50,37 @@ RequestSpecification reqAddProduct = given().log().all().spec(addproductBaseReq)
 String addproductResponse = reqAddProduct.when().post("api/ecom/product/add-product")
 .then().log().all().extract().response().asString();
 JsonPath js1 = new JsonPath(addproductResponse);
-String productId = js.getString("productId");
+String productId = js1.get("productId");
+System.out.println(productId);
+
+RequestSpecification reqAddtoCart=new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/")
+.addHeader("Authorization", token)
+.setContentType(ContentType.JSON)
+.build();
+ResponseSpecification respAddtoCart = new ResponseSpecBuilder().expectContentType(ContentType.JSON)
+.expectStatusCode(200).build();
+
+
+given().log().all().spec(reqAddtoCart).body("{\r\n"
+		+ "    \"_id\": \"64e71719753efa4657edee96\",\r\n"
+		+ "    \"product\": {\r\n"
+		+ "        \"_id\": \""+productId+"\",\r\n"
+		+ "        \"productName\": \"Sasik\",\r\n"
+		+ "        \"productCategory\": \"fashion\",\r\n"
+		+ "        \"productSubCategory\": \"shirts\",\r\n"
+		+ "        \"productPrice\": 1500,\r\n"
+		+ "        \"productDescription\": \"Adidas Originals\",\r\n"
+		+ "        \"productImage\": \"https://rahulshettyacademy.com/api/ecom/uploads/productImage_1695672677667.jpg\",\r\n"
+		+ "        \"productRating\": \"0\",\r\n"
+		+ "        \"productTotalOrders\": \"0\",\r\n"
+		+ "        \"productStatus\": true,\r\n"
+		+ "        \"productFor\": \"women\",\r\n"
+		+ "        \"productAddedBy\": \"64e71719753efa4657edee96\",\r\n"
+		+ "        \"__v\": 0\r\n"
+		+ "    }\r\n"
+		+ "}").when().post("api/ecom/user/add-to-cart")
+.then().log().all().spec(respAddtoCart).extract().response().asString();
+
 
 
 
