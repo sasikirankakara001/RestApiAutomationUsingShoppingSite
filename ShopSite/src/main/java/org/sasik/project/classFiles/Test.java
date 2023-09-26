@@ -81,6 +81,33 @@ given().log().all().spec(reqAddtoCart).body("{\r\n"
 		+ "}").when().post("api/ecom/user/add-to-cart")
 .then().log().all().spec(respAddtoCart).extract().response().asString();
 
+RequestSpecification createOrderProduct = 
+new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/")
+.addHeader("Authorization", token)
+.setContentType(ContentType.JSON)
+.build();
+ResponseSpecification responseOrderProduct = new ResponseSpecBuilder()
+.expectContentType(ContentType.JSON)
+.expectStatusCode(200).build();
+
+given().log().all().spec(createOrderProduct).body("{\r\n"
+		+ "    \"orders\": [\r\n"
+		+ "        {\r\n"
+		+ "            \"country\": \"India\",\r\n"
+		+ "            \"productOrderedId\": \""+productId+"\"\r\n"
+		+ "        }\r\n"
+		+ "    ]\r\n"
+		+ "}").when().post("api/ecom/order/create-order")
+.then().log().all().extract().response().asString();
+
+RequestSpecification deleteOrderProduct = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/")
+.addHeader("Authorization", token)
+.setContentType(ContentType.JSON)
+.build();
+
+given().log().all().spec(deleteOrderProduct).when().delete("api/ecom/product/delete-product/"+productId+"")
+.then().log().all().extract().response().asString();
+
 
 
 
