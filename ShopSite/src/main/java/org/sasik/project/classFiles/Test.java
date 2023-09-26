@@ -20,8 +20,8 @@ public class Test {
 	public static void main(String[] args) {
 		/* Login Details Setting Here */
 		Login login = new Login();
-		login.setUserEmail("sasikiran2213@gmail.com");
-		login.setUserPassword("Sasikiran@2213");
+		login.setUserEmail("admin_123@gmail.com");
+		login.setUserPassword("Admin@12345");
 	RequestSpecification	requestSession=new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/")
 		.setContentType(ContentType.JSON).build();
 	
