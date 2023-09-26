@@ -79,7 +79,7 @@ given().log().all().spec(reqAddtoCart).body("{\r\n"
 		+ "        \"__v\": 0\r\n"
 		+ "    }\r\n"
 		+ "}").when().post("api/ecom/user/add-to-cart")
-.then().log().all().spec(respAddtoCart).extract().response().asString();
+.then().log().all().extract().response().asString();
 
 RequestSpecification createOrderProduct = 
 new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/")
